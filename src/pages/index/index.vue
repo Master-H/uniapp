@@ -4,6 +4,8 @@
         <view class="text-area">
             <text class="title">{{ title }}</text>
         </view>
+        <view>{{ count }}</view>
+        <button @click="handleClickAdd">store.add</button>
         <navigator url="/pages/my/index">
             <button type="button">my</button>
         </navigator>
@@ -12,7 +14,18 @@
 
 <script setup lang="ts">
 import {ref} from 'vue';
+import {useStore} from '@/store/index';
+const {count, add}  = useStore();
+
+// console.log('store', store);
+
+
+const handleClickAdd = () => {
+    add();
+};
 const title = ref('Hello11');
+
+
 </script>
 
 <style>
