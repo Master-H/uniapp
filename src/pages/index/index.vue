@@ -1,57 +1,109 @@
 <template>
-    <view class="content">
-        <image class="logo" src="/static/logo.png"/>
-        <view class="text-area">
-            <text class="title">{{ title }}</text>
-        </view>
-        <view>{{ count }}</view>
-        <button @click="handleClickAdd">store.add</button>
-        <navigator url="/pages/my/index">
-            <button type="button">my</button>
-        </navigator>
+    <view class="tab1">
+        <uni-section title="全局样式使用" type="line">
+            <uni-card :is-shadow="false">
+                <div></div>
+                <text class="text">这是一个基础卡片示例，内容较少，此示例展示了一个没有任何属性不带阴影的卡片。</text>
+            </uni-card>
+        </uni-section>
+
+        <uni-section title="全局类名使用" type="line">
+            <uni-card :is-shadow="false">
+                <text class="c-fw500">这是一个基础卡片示例，内容较少，此示例展示了一个没有任何属性不带阴影的卡片。</text>
+            </uni-card>
+        </uni-section>
+
+        <uni-section title="utils使用" type="line">
+            <uni-card :is-shadow="false">
+                <text>{{ Utils.getPagePath() }}</text>
+            </uni-card>
+        </uni-section>
+
+        <uni-section title="pinia使用" type="line">
+            <uni-card :is-shadow="false">
+                <div class="block">
+                    <uni-tag
+                        :text="`count值：${count}`"
+                        type="primary"
+                        class="tag"
+                        :inverted="true"
+                    />
+                    <uni-icons
+                        type="plus-filled"
+                        size="30"
+                        class="icon"
+                        @click="handleAddCount"
+                    />
+                </div>
+                <div class="block">
+                    <uni-tag
+                        :text="`age${info.age}`"
+                        type="primary"
+                        class="tag"
+                        :inverted="true"
+                    />
+                    <uni-icons
+                        type="plus-filled"
+                        size="30"
+                        class="icon"
+                        @click="handleAddAge"
+                    />
+                </div>
+            </uni-card>
+        </uni-section>
     </view>
 </template>
 
-<script setup lang="ts">
-import {ref} from 'vue';
-import {useStore} from '@/store/index';
-const {count, add}  = useStore();
+<script lang="ts" setup>
+import {onInit} from '@dcloudio/uni-app';
+import {API} from '@/utils/api';
+import {request} from '@/utils/request';
+import {Utils} from '@/utils/utils';
+import {useGlobalStore} from '@/store/index';
+import {storeToRefs} from 'pinia';
 
-// console.log('store', store);
+const globalStore = useGlobalStore();
+const {count, info} = storeToRefs(globalStore);
 
-
-const handleClickAdd = () => {
-    add();
+const handleAddCount = () => {
+    globalStore.addCount();
 };
-const title = ref('Hello11');
 
+const handleAddAge = () => {
+    globalStore.addAge();
+};
+
+onInit(async () => {
+    const data = await request.get(API.INDEX.BANNER).catch();
+    console.log('data', data);
+
+});
 
 </script>
 
-<style>
-.content {
+<style lang="scss">
+.text {
+  color: $uni-color-error;
+}
+
+.block {
   display: flex;
-  flex-direction: column;
+  height: 100rpx;
+  border: 1px solid gray;
   align-items: center;
-  justify-content: center;
-}
+  margin-bottom: 6px;
 
-.logo {
-  height: 200rpx;
-  width: 200rpx;
-  margin-top: 200rpx;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 50rpx;
-}
+  .tag {
+      margin-right: 10rpx;
+      height: 100%;
+      align-items: center;
+      display: flex;
+  }
 
-.text-area {
-  display: flex;
-  justify-content: center;
-}
-
-.title {
-  font-size: 36rpx;
-  color: #8f8f94;
+  .icon {
+      height: 100%;
+      display: flex;
+      align-items: center;
+  }
 }
 </style>

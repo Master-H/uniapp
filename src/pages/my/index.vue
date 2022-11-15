@@ -1,3 +1,11 @@
+<!--
+ * @Author: huangxingyuan uestchxy@163.com
+ * @Date: 2022-10-04 10:24:52
+ * @LastEditors: huangxingyuan uestchxy@163.com
+ * @LastEditTime: 2022-10-04 11:08:24
+ * @FilePath: /uniapp/src/pages/my/index.vue
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <template>
     <div class="my">my</div>
 </template>
@@ -35,4 +43,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+    .my {
+        color: red;
+    }
+</style>

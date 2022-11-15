@@ -1,21 +1,29 @@
-// store.js
 import {defineStore} from 'pinia';
+import {ref, reactive} from 'vue';
 
-// defineStore 调用后返回一个函数，调用该函数获得 Store 实体
-export const useStore = defineStore({
-    // id: 必须的，在所有 Store 中唯一
-    id: 'globalStore',
-    // state: 返回对象的函数
-    state: () => ({
-        count: 1,
-    }),
-    actions: {
-        add() {
-            this.count++;
-        },
-        async log() {
-            await Promise.resolve(1);
-            console.log(222);
-        },
-    },
+export const useGlobalStore = defineStore('globalStore', () => {
+    const count  = ref<number>(1);
+    interface Info {
+        name: string;
+        age: number;
+    }
+    const info = reactive<Info>({
+        name: '',
+        age: 1,
+    });
+
+    const addCount  = () => {
+        count.value = count.value + 1;
+    };
+
+    const addAge = () => {
+        info.age = info.age + 1;
+    };
+
+    return {
+        count,
+        info,
+        addCount,
+        addAge,
+    };
 });
