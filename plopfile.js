@@ -1,6 +1,5 @@
 /**
  * @file plop执行入口文件
- * @author huangxingyuan@baidu.com
  * @date 2021-11-08
  */
 

@@ -1,6 +1,5 @@
 /**
  * @file request
- * @author huangxingyuan@baidu.com
  */
 
 import {toast} from '@/utils/utils';
