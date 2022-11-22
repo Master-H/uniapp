@@ -19,13 +19,6 @@
 				"navigationBarTitleText": "shop"
 			}
 		},
-		{
-			"path": "pages/shop/index",
-			"style": {
-				"backgroundColor": "#fff",
-				"navigationBarTitleText": "shop"
-			}
-		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -43,6 +36,12 @@
 			},
 			{
 				"pagePath": "pages/my/index",
+				"text": "my",
+				"iconPath": "static/tabbar/my.png",
+				"selectedIconPath": "static/tabbar/my_active.png"
+			},
+			{
+				"pagePath": "pages/shop/index",
 				"text": "my",
 				"iconPath": "static/tabbar/my.png",
 				"selectedIconPath": "static/tabbar/my_active.png"

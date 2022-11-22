@@ -1,24 +1,22 @@
 /**
  * @file api接口地址管理
- * @author huangxingyuan@baidu.com
  */
 
- const BASE_URL = 'http://yq01-svc-01.yq01.baidu.com:8989';
+const BASE_URL = 'http://www.xxx.com';
 
- export const API = {
-     // 首页tab
-     INDEX: {
-         BANNER: `${BASE_URL}/v1/common/setting/banner`, // 小程序首页banner接口
-     },
-     // 政务宝典tab
-     GOV: {
-         MAIN: `${BASE_URL}/corn/dolly/n/goods/detail`,
-     },
-     // 我的tab
-     MY: {
-         CONTENT: `${BASE_URL}/v1/common/setting/home_page`,
-     },
- };
- 
- export default API;
- 
+export const API = {
+    // tab1
+    TBA1: {
+        BANNER: `${BASE_URL}/list`,
+    },
+    // tab2接口
+    TAB2: {
+        BANNER: `${BASE_URL}/list`,
+    },
+    // tab3
+    TAB3: {
+        BANNER: `${BASE_URL}/list`,
+    },
+};
+
+export default API;

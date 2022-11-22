@@ -1,8 +1,31 @@
 <template>
     <view class="tab1">
+        <uni-section title="store使用" type="line">
+            <uni-card :is-shadow="false">
+                <div>count:{{ count }}</div>
+            </uni-card>
+        </uni-section>
+        <uni-section title="修改store数据" type="line">
+            <uni-card :is-shadow="false">
+                <div class="block">
+                    <uni-tag
+                        :text="`count值：${count}`"
+                        type="primary"
+                        class="tag"
+                        :inverted="true"
+                    />
+                    <uni-icons
+                        type="plus-filled"
+                        size="30"
+                        class="icon"
+                        @click="handleAddCount"
+                    />
+                </div>
+            </uni-card>
+        </uni-section>
         <uni-section title="全局样式使用" type="line">
             <uni-card :is-shadow="false">
-                <div></div>
+                <div>count:{{ count }}</div>
                 <text class="text">这是一个基础卡片示例，内容较少，此示例展示了一个没有任何属性不带阴影的卡片。</text>
             </uni-card>
         </uni-section>
@@ -63,6 +86,7 @@ import {useGlobalStore} from '@/store/index';
 import {storeToRefs} from 'pinia';
 
 const globalStore = useGlobalStore();
+// const {count, info, age} = globalStore;
 const {count, info} = storeToRefs(globalStore);
 
 const handleAddCount = () => {
@@ -74,7 +98,7 @@ const handleAddAge = () => {
 };
 
 onInit(async () => {
-    const data = await request.get(API.INDEX.BANNER).catch();
+    const data = await request.get(API.TBA1.BANNER).catch();
     console.log('data', data);
 
 });

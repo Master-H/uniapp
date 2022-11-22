@@ -10,9 +10,6 @@
 
 <script lang="ts" setup>
 import {onInit} from '@dcloudio/uni-app';
-import {API} from '@/utils/api';
-import {request} from '@/utils/request';
-import {Utils} from '@/utils/utils';
 import {useGlobalStore} from '@/store/index';
 import {storeToRefs} from 'pinia';
 

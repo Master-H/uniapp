@@ -1,7 +1,3 @@
-import {useGlobalStore} from '@/store';
-import {request} from '@/utils/request';
-import APIS, {API} from '@/utils/api';
-
 export const toast = (
     title: string,
     duration = 3000,
