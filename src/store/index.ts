@@ -3,13 +3,16 @@ import {ref, reactive} from 'vue';
 
 export const useGlobalStore = defineStore('globalStore', () => {
     const count  = ref<number>(1);
+    const weather  = ref<string>('');
     interface Info {
         name: string;
         age: number;
+        height: number;
     }
     const info = reactive<Info>({
-        name: '',
+        name: '成都巴菲特',
         age: 1,
+        height: 166,
     });
 
     const addCount  = () => {
@@ -20,10 +23,19 @@ export const useGlobalStore = defineStore('globalStore', () => {
         info.age = info.age + 1;
     };
 
+    const updateWeather =  async (city: string) => {
+        // 模拟接口返回
+        const data = await Promise.resolve(`${city}-天气`);
+        weather.value = data;
+    };
+
+
     return {
         count,
         info,
-        addCount,
+        addCount: addCount,
         addAge,
+        updateWeather,
+        weather,
     };
 });

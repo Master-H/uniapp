@@ -4,20 +4,20 @@
 
 import {toast} from '@/utils/utils';
  interface ResponseData {
-     code: string;
+     code: number;
      message: string;
      data: unknown;
  }
 
 /**
-  * resolveHeader
+  * getHeaderConfig
   *
   * 获取公共请求头，存放登录token信息
   *
   * @returns {UniNamespace.RequestOptions['header']}
   */
-function resolveHeader(): UniNamespace.RequestOptions['header'] {
-    const token = uni.getStorageSync('accessToken');
+function getHeaderConfig(): UniNamespace.RequestOptions['header'] {
+    const token = uni.getStorageSync('token');
     return {token};
 }
 
@@ -37,15 +37,34 @@ function handleSuccess(
     resolve: (data: unknown) => void,
     reject: (message: string) => void
 ) {
-    const responseData = response.data as ResponseData;
-    const statusCode = response.statusCode;
-    if (statusCode === 200 && responseData.code === 'OK') {
-        return resolve(responseData.data);
+    const {statusCode, data = {}} = response;
+    const {code, message} = data as ResponseData;
+    if (statusCode === 200 && code === 0) {
+        return resolve(data);
     }
 
-    toast(responseData.message);
-    reject(responseData.message);
-
+    toast(message);
+    reject(message);
+}
+/**
+  * handleSuccess
+  *
+  * 处理接口成功响应
+  * @params response 请求数据
+  * @params response
+  * @params reject
+  *
+  * @returns {UniNamespace.RequestOptions['header']}
+  */
+function handleFail(
+    err: UniNamespace.GeneralCallbackResult,
+    reject: (message: object) => void
+) {
+    console.log(err);
+    reject({
+        errno: -1,
+        errmsg: '网络不给力，请检查你的网络设置~',
+    });
 }
 
 /**
@@ -74,19 +93,13 @@ export function baseRequest(
                 handleSuccess(res, resolve, reject);
             },
             fail(err) {
-                console.log(err);
-                reject({
-                    errno: -1,
-                    errmsg: '网络不给力，请检查你的网络设置~',
-                });
+                handleFail(err, reject);
             },
         });
     });
 }
-const maxRequestCount = 3;
 
-function requestHelper() {
-    let times = 0;
+function handleRequest() {
     return async function innerReq(
         url: string,
         method: UniNamespace.RequestOptions['method'],
@@ -94,23 +107,19 @@ function requestHelper() {
     ): Promise<any> {
         try {
             // 公共请求头
-            const header = resolveHeader();
+            const header = getHeaderConfig();
             return await baseRequest(url, method, data, header);
         }
         catch (err: any) {
-            //  超时重连
-            if (times < maxRequestCount) {
-                times++;
-                return await innerReq(url, method, data);
-            }
             throw err;
         }
     };
 }
 
+
 export const request = {
-    get: (url: string, params?: object) => requestHelper()(url, 'GET', {...params}),
-    post: (url: string, params?: object) => requestHelper()(url, 'POST', {...params}),
-    put: (url: string, params?: object) => requestHelper()(url, 'PUT', {...params}),
-    delete: (url: string, params?: object) => requestHelper()(url, 'DELETE', {...params}),
+    get: (url: string, params?: object) => handleRequest()(url, 'GET', {...params}),
+    post: (url: string, params?: object) => handleRequest()(url, 'POST', {...params}),
+    put: (url: string, params?: object) => handleRequest()(url, 'PUT', {...params}),
+    delete: (url: string, params?: object) => handleRequest()(url, 'DELETE', {...params}),
 };

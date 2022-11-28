@@ -7,6 +7,9 @@ const BASE_URL = 'http://www.xxx.com';
 export const API = {
     // tab1
     TBA1: {
+        /**
+         * 获取数据
+         */
         BANNER: `${BASE_URL}/list`,
     },
     // tab2接口

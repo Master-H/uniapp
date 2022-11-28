@@ -3,6 +3,7 @@
         <uni-section title="store使用" type="line">
             <uni-card :is-shadow="false">
                 <div>count:{{ count }}</div>
+                <div>info.height:{{ info.height }}</div>
             </uni-card>
         </uni-section>
         <uni-section title="修改store数据" type="line">
@@ -86,9 +87,9 @@ import {useGlobalStore} from '@/store/index';
 import {storeToRefs} from 'pinia';
 
 const globalStore = useGlobalStore();
-// const {count, info, age} = globalStore;
 const {count, info} = storeToRefs(globalStore);
 
+// 直接修改state
 const handleAddCount = () => {
     globalStore.addCount();
 };
@@ -113,7 +114,6 @@ onInit(async () => {
 .block {
   display: flex;
   height: 100rpx;
-  border: 1px solid gray;
   align-items: center;
   margin-bottom: 6px;
 
