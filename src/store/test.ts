@@ -13,7 +13,7 @@ export const useGlobalStore = defineStore({
             this.count = this.count + 1;
         },
         log(str = 'log') {
-            console.log('log-----', st);
+            console.log('log-----', str);
         },
     },
 });

@@ -40,6 +40,13 @@ module.exports = {
             name: 'barTitle',
             message: `${chalk.yellow('🚀 请输入页面标题')}`,
         },
+        {
+            type: 'list',
+            name: 'type',
+            message: `${chalk.yellow('🚀 请输入页面标题')}`,
+            default: 'no',
+            choices: ['yes', 'no'],
+        },
     ],
     actions: ({path, barTitle}) => {
         const actions = [];

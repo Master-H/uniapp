@@ -2,6 +2,7 @@
     <view class="tab1">
         <uni-section title="store使用" type="line">
             <uni-card :is-shadow="false">
+                <Test/>
                 <div>count:{{ count }}</div>
                 <div>info.height:{{ info.height }}</div>
             </uni-card>

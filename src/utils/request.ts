@@ -49,9 +49,8 @@ function handleSuccess(
 /**
   * handleSuccess
   *
-  * 处理接口成功响应
-  * @params response 请求数据
-  * @params response
+  * 处理接口失败响应
+  * @params err 异常对象
   * @params reject
   *
   * @returns {UniNamespace.RequestOptions['header']}
@@ -63,7 +62,7 @@ function handleFail(
     console.log(err);
     reject({
         errno: -1,
-        errmsg: '网络不给力，请检查你的网络设置~',
+        errmsg: '网络不给力',
     });
 }
 
