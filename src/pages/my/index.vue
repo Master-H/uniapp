@@ -1,43 +1,33 @@
 <template>
-    <div class="my">my</div>
+    <view>
+        <uni-section title="全局类名使用" type="line">
+            <uni-card :is-shadow="false">
+                <text class="c-title text">这是一个基础卡片示例</text>
+            </uni-card>
+        </uni-section>
+        <uni-section title="图片体积" type="line">
+            <uni-card :is-shadow="false">
+                <SaveImage/>>
+            </uni-card>
+        </uni-section>
+    </view>
+
 </template>
 
-<script>
-export default {
-    name: 'my',
-    components: {},
-    props: {},
-    data() {
-        return {};
-    },
-    computed: {},
-    methods: {},
-    watch: {},
+<script lang="ts" setup>
+import {onLoad} from '@dcloudio/uni-app';
+onLoad(async () => {
+    console.log(4444444);
 
-    // 页面周期函数--监听页面加载
-    onLoad() {},
-    // 页面周期函数--监听页面初次渲染完成
-    onReady() {},
-    // 页面周期函数--监听页面显示(not-nvue)
-    onShow() {},
-    // 页面周期函数--监听页面隐藏
-    onHide() {},
-    // 页面周期函数--监听页面卸载
-    onUnload() {},
-    // 页面处理函数--监听用户下拉动作
-    // onPullDownRefresh() { uni.stopPullDownRefresh(); },
-    // 页面处理函数--监听用户上拉触底
-    // onReachBottom() {},
-    // 页面处理函数--监听页面滚动(not-nvue)
-    // onPageScroll(event) {},
-    // 页面处理函数--用户点击右上角分享
-    // onShareAppMessage(options) {},
-};
+    // const imgSize = await getImageSize(props.src) as number;
+    // const formatImgSize = bytesToSize(imgSize);
+    // console.log('formatImgSize', formatImgSize);
+
+});
 </script>
 
-<style scoped>
-
-    .my {
-        color: red;
-    }
+<style lang="scss">
+.text {
+    color: $uni-text-color-red;
+}
 </style>

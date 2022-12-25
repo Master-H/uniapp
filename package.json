@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "start": "uni -p mp-weixin",
+    "baidu": "uni -p mp-baidu",
     "add": "plop",
     "dev:mp-baidu": "uni -p mp-baidu",
     "dev:mp-weixin": "uni -p mp-weixin",
