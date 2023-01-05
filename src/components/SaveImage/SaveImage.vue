@@ -14,7 +14,7 @@ import {onMounted} from 'vue';
 const props = defineProps({
     src: {
         type: String,
-        default: 'https://t10.baidu.com/it/u=2512351127,2651210443&fm=179&app=35&f=JPEG?w=2484&h=1396&s=C6349EE67BF33C8634148D2903005051',
+        default: 'https://t12.baidu.com/it/u=2601721880,178854445&fm=30&app=106&f=JPEG?w=640&h=436&s=32B17984164236FAC21CC98D0200F09B',
     },
 });
 // 图片体积bit转换
@@ -53,13 +53,21 @@ const getImageSize = (src: string) => {
     });
 };
 onMounted(async () => {
-    console.log(11111122);
-    Utils.toast('测试');
+    uni.downloadFile({
+        url: props.src,
+        success: res => {
+            const imageByte = res.dataLength;
+            const imageSize = bytesToSize(imageByte);
+            uni.getImageInfo({
+                src: props.src,
+                success: res => {
+                    console.log(1, res.width);
+                    console.log(2, res.height);
+                },
+            });
 
-    const imgSize = await getImageSize(props.src) as number;
-    const formatImgSize = bytesToSize(imgSize);
-    console.log('formatImgSize', formatImgSize);
-
+        },
+    });
 });
 
 
