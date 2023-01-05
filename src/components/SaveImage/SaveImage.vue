@@ -29,7 +29,6 @@ const bytesToSize = (bytes: number) => {
 };
 const getImageSize = (src: string) => {
     console.log(99999);
-
     return new Promise((resolve, reject) => {
         let blob = null;
         const xhr = new XMLHttpRequest();
